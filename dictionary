@@ -1,0 +1,41 @@
+//
+//  main.c
+//  dictionary
+//
+//  Created by G Bannikoppa, Naveen on 05/03/23.
+//
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, const char * argv[]) {
+    int num =0;
+            char word[2000];
+            char string[50];
+            char search_word[100] = {0};
+
+            while(search_word[0]!= '0')
+            {
+                    FILE *in_file = fopen("dictionary.txt", "r");
+                    if (in_file == NULL)
+                    {
+                            printf("Error file missing\n");
+                            exit(-1);
+                    }
+
+                    printf("please enter a word(enter 0 to end)\n");
+                    scanf("%s", search_word);
+                    while ( fscanf(in_file,"%s", string) == 1)
+                    {
+                            //Add a for loop till strstr(string, search_word) does-not returns null.
+                            if(strstr(string, search_word)!=0) {//if match found
+                                    num++;
+                            }
+                    }
+                    printf("we found the word %s in the file %d times\n",search_word,num );
+                    num = 0;
+                    fclose(in_file);
+            }
+            return 0;
+}
